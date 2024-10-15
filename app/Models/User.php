@@ -14,7 +14,6 @@ class User
     protected $password;
     protected $role;
     protected $status;
-    protected $isLogged;
     protected $createdAt;
 
     public function __construct(
@@ -28,7 +27,6 @@ class User
         $password,
         $role,
         $status,
-        $isLogged,
         $createdAt
     ) {
         $this->id = $id;
@@ -41,7 +39,6 @@ class User
         $this->password = $password;
         $this->role = $role;
         $this->status = $status;
-        $this->isLogged = $isLogged;
         $this->createdAt = $createdAt;
     }
 
@@ -185,24 +182,6 @@ class User
     public function setRole($role): self
     {
         $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of isLogged
-     */
-    public function getIsLogged()
-    {
-        return $this->isLogged;
-    }
-
-    /**
-     * Set the value of isLogged
-     */
-    public function setIsLogged($isLogged): self
-    {
-        $this->isLogged = $isLogged;
 
         return $this;
     }

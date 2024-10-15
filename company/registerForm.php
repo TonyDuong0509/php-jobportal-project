@@ -6,15 +6,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <form action="<?php echo $router->generate('admin.register'); ?>" method="POST" class="md-float-material form-material">
+                    <form action="<?php echo $router->generate('auth.company.register'); ?>" method="POST" class="md-float-material form-material">
                         <div class="text-center">
-                            <img src="<?php ABSPATH ?> /public/admin/images/logo.png" alt="logo.png">
+                            <img src="<?php ABSPATH ?> /public/user/images/logo.png" alt="logo.png">
                         </div>
                         <div class="auth-box card">
                             <div class="card-block">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Sign up</h3>
+                                        <h3 class="text-center txt-primary">Sign Up Company</h3>
                                     </div>
                                 </div>
                                 <div class="form-group form-primary">
@@ -62,7 +62,7 @@
                                     </select>
                                 </div>
 
-                                <p style="text-decoration: underline; margin-top: 15px;">You already have account ? Please click <a style="color: blue" href="/admin/login/form">here</a> to log in !</p>
+                                <p style="text-decoration: underline; margin-top: 15px;">You already have account ? Please click <a style="color: blue" href="/company/login/form">here</a> to log in !</p>
 
                                 <div class="row m-t-30">
                                     <div class="col-md-12">

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
-                    <form action="<?php echo $router->generate('admin.login') ?>" method="POST" class="md-float-material form-material">
+                    <form action="<?php echo $router->generate('auth.admin.login') ?>" method="POST" class="md-float-material form-material">
                         <div class="text-center">
                             <img src="<?php ABSPATH ?> /public/admin/images/logo.png" alt="logo.png">
                         </div>
@@ -42,7 +42,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p style="text-decoration: underline; margin-top: 15px;">You don't have account ? Please click <a style="color: blue" href="/admin/register/form">here</a> to register !</p>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Sign in</button>

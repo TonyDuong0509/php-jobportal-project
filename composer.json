@@ -6,7 +6,8 @@
         }
     ],
     "require": {
-        "altorouter/altorouter": "^2.0"
+        "altorouter/altorouter": "^2.0",
+        "cocur/slugify": "^4.6"
     },
     "autoload": {
     "psr-4": {

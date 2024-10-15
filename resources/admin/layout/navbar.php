@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
-                            <a href="<?php echo $router->generate('admin.logout'); ?>">
+                            <a href="<?php echo $router->generate('auth.admin.logout'); ?>">
                                 <i class="ti-layout-sidebar-left"></i> Logout
                             </a>
                         </li>

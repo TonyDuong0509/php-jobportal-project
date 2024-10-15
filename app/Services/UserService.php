@@ -23,7 +23,7 @@ class UserService
         return $this->userRepository->fetchAll();
     }
 
-    public function findByEmail($email)
+    public function getByEmail($email)
     {
         return $this->userRepository->findByEmail($email);
     }

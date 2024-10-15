@@ -19,11 +19,10 @@ class UserRepository implements UserRepositoryInterface
         $password = $data['password'];
         $role = $data['role'];
         $status = $data['status'];
-        $isLogged = $data['isLogged'];
         $createdAt = $data['createdAt'];
 
-        $sql = "INSERT INTO users (name, phone, address, email, about, photo, password, role, status, isLogged, createdAt)
-                VALUES ('$name', '$phone', '$address', '$email', '$about', '$photo', '$password', '$role', '$status', '$isLogged', '$createdAt')";
+        $sql = "INSERT INTO users (name, phone, address, email, about, photo, password, role, status, createdAt)
+                VALUES ('$name', '$phone', '$address', '$email', '$about', '$photo', '$password', '$role', '$status', '$createdAt')";
 
         if ($conn->query($sql) === true) {
             $last_id = $conn->insert_id;
@@ -57,7 +56,6 @@ class UserRepository implements UserRepositoryInterface
                     $row['password'],
                     $row['role'],
                     $row['status'],
-                    $row['isLogged'],
                     $row['createdAt']
                 );
                 $users[] = $user;
