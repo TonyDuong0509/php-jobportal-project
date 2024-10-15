@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\Auth;
 
 use App\Services\UserService;
-use DateTime;
-use DateTimeZone;
+use Utils\Helper;
 
 class AuthController
 {
@@ -15,38 +14,27 @@ class AuthController
         $this->userService = $userService;
     }
 
-    private function getDateTime()
-    {
-        $date = new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh'));
-        return $date->format('Y-m-d H:i:s');
-    }
-
-    public function registerForm()
-    {
-        require ABSPATH . '/admin/registerForm.php';
-    }
-
-    public function register()
+    public function register($model)
     {
         $data = [];
+        $data['email'] = $_POST['email'] ?? '';
         $data['name'] = $_POST['name'] ?? '';
         $data['phone'] = $_POST['phone'] ?? '';
         $data['address'] = $_POST['address'] ?? '';
-        $data['email'] = $_POST['email'] ?? '';
         $data['about'] = '';
         $data['photo'] = '';
         $data['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $data['role'] = $_POST['role'] ?? '';
         $data['status'] = 0;
-        $data['isLogged'] = 0;
-        $data['createdAt'] = $this->getDateTime();
+        $helper = new Helper();
+        $data['createdAt'] = $helper->getDateTime();
 
-        if ($this->userService->findByEmail($_POST['email'])) {
+        if ($this->userService->getByEmail($_POST['email'])) {
             $_SESSION['notification'] = [
                 'message' => 'Email is exist, please chose another email !',
                 'alert-type' => 'error',
             ];
-            header("Location: /admin/register/form");
+            header("Location: /$model/register/form");
             exit;
         }
 
@@ -55,27 +43,33 @@ class AuthController
             'message' => 'Register successfully, you can log in',
             'alert-type' => 'success',
         ];
-        header("Location: /admin/login/form");
+        header("Location: /$model/login/form");
         exit;
+    }
+
+    public function registerCompany()
+    {
+        return $this->register('company');
     }
 
     public function loginForm()
     {
+        $title = 'Admin Log In';
         require ABSPATH . '/admin/loginForm.php';
     }
 
-    public function login()
+    public function login($model)
     {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
 
-        $user = $this->userService->findByEmail($email);
-        if (!$user) {
+        $user = $this->userService->getByEmail($email);
+        if (!($user)) {
             $_SESSION['notification'] = [
                 'message' => 'Email is invalid, please try again',
                 'alert-type' => 'error'
             ];
-            header("Location: /admin/login/form");
+            header("Location: /$model/login/form");
             exit;
         }
 
@@ -84,20 +78,20 @@ class AuthController
                 'message' => 'Password is invalid, please try again',
                 'alert-type' => 'error',
             ];
-            header("Location: /admin/login/form");
+            header("Location: /$model/login/form");
             exit;
         }
 
-        if ($user->getRole() !== 'admin') {
+        if ($user->getRole() !== "$model") {
             $_SESSION['notification'] = [
                 'message' => 'This account is not authorized, please try correct account',
                 'alert-type' => 'error',
             ];
-            header("Location: /admin/login/form");
+            header("Location: /$model/login/form");
             exit;
         }
 
-        $_SESSION['admin'] = [
+        $_SESSION["$model"] = [
             'email' => $email,
             'name' => $user->getName(),
             'role' => $user->getRole(),
@@ -108,18 +102,38 @@ class AuthController
             'message' => 'Sign in successfully',
             'alert-type' => 'success',
         ];
-        header("Location: /admin/dashboard");
+        header("Location: /$model/dashboard");
         exit;
     }
 
-    public function logout()
+    public function loginAdmin()
     {
-        unset($_SESSION['admin']['email']);
+        return $this->login('admin');
+    }
+
+    public function loginCompany()
+    {
+        return $this->login('company');
+    }
+
+    public function logout($model)
+    {
+        unset($_SESSION["$model"]['email']);
         $_SESSION['notification'] = [
             'message' => 'Logout successfully',
             'alert-type' => 'success',
         ];
-        header("Location: /admin/login/form");
+        header("Location: /$model/login/form");
         exit;
+    }
+
+    public function logoutAdmin()
+    {
+        return $this->logout('admin');
+    }
+
+    public function logoutCompany()
+    {
+        return $this->logout('company');
     }
 }

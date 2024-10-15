@@ -29,7 +29,7 @@
  <script type="text/javascript" src="<?php ABSPATH ?> /public/admin/pages/dashboard/custom-dashboard.js"></script>
  <script type="text/javascript" src="<?php ABSPATH ?> /public/admin/js/script.js "></script>
  <script type="text/javascript" src="<?php ABSPATH ?> /public/admin/js/myScript.js "></script>
-
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
  <?php include ABSPATH . '/resources/toast.php'; ?>
  </body>

@@ -11,10 +11,16 @@ $router = new AltoRouter();
 global $router;
 
 require './../config.php';
+
 require ABSPATH . '/database.php';
+
 require ABSPATH . '/bootstrap.php';
-require ABSPATH . '/container/UserDI.php';
+
+require ABSPATH . '/container/RegisterDI.php';
+
 require ABSPATH . '/routes/adminRoute.php';
+
+require ABSPATH . '/utils/helper.php';
 
 if ($match === false) {
     header("Location: /admin/dashboard");
@@ -22,10 +28,8 @@ if ($match === false) {
 }
 
 $publicRoutes = [
-    'admin.register',
-    'admin.login',
+    'auth.admin.login',
     'admin.login.form',
-    'admin.register.form',
 ];
 
 if (!isset($_SESSION['admin']['email']) && !in_array($match['name'], $publicRoutes)) {
