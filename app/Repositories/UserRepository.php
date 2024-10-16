@@ -72,4 +72,58 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+
+    public function findById($id)
+    {
+        $condition = "id = '$id'";
+        $users = $this->fetchAll($condition);
+        $user = current($users);
+
+        return $user;
+    }
+
+    public function update($user)
+    {
+        global $conn;
+        $id = $user->getId();
+        $name = $user->getName();
+        $phone = $user->getPhone();
+        $address = $user->getAddress();
+        $about = $user->getAbout();
+
+        $sql = "UPDATE users
+                SET name = '$name', phone = '$phone', address = '$address', about = '$about'
+                WHERE id = '$id'";
+        if ($conn->query($sql) === true) return true;
+        echo "Error " . $sql . PHP_EOL;
+        return false;
+    }
+
+    public function updatePhoto($user)
+    {
+        global $conn;
+        $id = $user->getId();
+        $photo = $user->getPhoto();
+
+        $sql = "UPDATE users
+                SET photo = '$photo'
+                WHERE id = '$id'";
+        if ($conn->query($sql) === true) return true;
+        echo "Error " . $sql . PHP_EOL;
+        return false;
+    }
+
+    public function changePassword($user)
+    {
+        global $conn;
+        $id = $user->getId();
+        $password = $user->getPassword();
+
+        $sql = "UPDATE users
+                SET password = '$password'
+                WHERE id = '$id'";
+        if ($conn->query($sql) === true) return true;
+        echo "Error " . $sql . PHP_EOL;
+        return false;
+    }
 }

@@ -13,7 +13,7 @@ $router = new AltoRouter();
 require 'config.php';
 require ABSPATH . '/database.php';
 require ABSPATH . '/bootstrap.php';
-require ABSPATH . '/routes/webp.php';
+require ABSPATH . '/routes/adminRoute.php';
 
 if (is_array($match) && is_callable($match['target'])) {
     call_user_func_array($match['target'], $match['params']);
