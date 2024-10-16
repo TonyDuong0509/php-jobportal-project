@@ -36,4 +36,29 @@ $router->map('GET', '/company/logout', function () use ($serviceContainer) {
     $controller->logoutCompany();
 }, 'auth.company.logout');
 
+$router->map('GET', '/company/profile/[i:id]', function ($id) use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\CompanyController::class);
+    $controller->profile($id);
+}, 'company.profile');
+
+$router->map('POST', '/company/updateProfile', function () use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\CompanyController::class);
+    $controller->updateProfile();
+}, 'company.update.profile');
+
+$router->map('POST', '/company/uploadPhoto', function () use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\CompanyController::class);
+    $controller->uploadPhoto();
+}, 'company.upload.photo');
+
+$router->map('GET', '/company/change-password/[i:id]', function ($id) use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\CompanyController::class);
+    $controller->changePasswordPage($id);
+}, 'company.change.password.page');
+
+$router->map('POST', '/company/change-password', function () use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\CompanyController::class);
+    $controller->changePassword();
+}, 'company.change.password');
+
 $match = $router->match();

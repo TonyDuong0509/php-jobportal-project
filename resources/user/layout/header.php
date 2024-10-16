@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="<?php ABSPATH ?> /public/user/css/jquery-ui.css" />
     <link rel="stylesheet" href="<?php ABSPATH ?> /public/user/css/chosen.min.css" />
     <link rel="stylesheet" href="<?php ABSPATH ?> /public/user/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <?php
