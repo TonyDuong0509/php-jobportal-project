@@ -151,6 +151,24 @@ class User
     }
 
     /**
+     * Get the value of photo
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set the value of photo
+     */
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
      * Get the value of password
      */
     public function getPassword()
@@ -205,19 +223,19 @@ class User
     }
 
     /**
-     * Get the value of photo
+     * Get the value of createdAt
      */
-    public function getPhoto()
+    public function getCreatedAt()
     {
-        return $this->photo;
+        return $this->createdAt;
     }
 
     /**
-     * Set the value of photo
+     * Set the value of createdAt
      */
-    public function setPhoto($photo): self
+    public function setCreatedAt($createdAt): self
     {
-        $this->photo = $photo;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

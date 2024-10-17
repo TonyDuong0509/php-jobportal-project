@@ -56,7 +56,7 @@ class CompanyController
                 'message' => 'Company not exist',
                 'alert-type' => 'error',
             ];
-            header("Location: /company/profile/$id");
+            header("Location: /company/home");
             exit;
         }
 
@@ -92,7 +92,7 @@ class CompanyController
                 'message' => 'Company not exist',
                 'alert-type' => 'error',
             ];
-            header("Location: /company/profile/$id");
+            header("Location: /company/home");
             exit;
         }
 
@@ -135,7 +135,7 @@ class CompanyController
                 'message' => 'Company not exist',
                 'alert-type' => 'error',
             ];
-            header("Location: /company/change-password/$id");
+            header("Location: /company/home");
             exit;
         }
 

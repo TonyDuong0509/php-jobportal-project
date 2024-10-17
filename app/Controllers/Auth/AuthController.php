@@ -2,32 +2,41 @@
 
 namespace App\Controllers\Auth;
 
+use App\Services\CompanyService;
 use App\Services\UserService;
 use Utils\Helper;
 
 class AuthController
 {
     private $userService;
+    private $companyService;
 
-    public function __construct(UserService $userService)
-    {
+    public function __construct(
+        UserService $userService,
+        CompanyService $companyService
+    ) {
         $this->userService = $userService;
+        $this->companyService = $companyService;
     }
 
     public function register($model)
     {
         $data = [];
-        $data['email'] = $_POST['email'] ?? '';
-        $data['name'] = $_POST['name'] ?? '';
-        $data['phone'] = $_POST['phone'] ?? '';
-        $data['address'] = $_POST['address'] ?? '';
+        $data['email'] = $_POST['email'];
+        $data['name'] = $_POST['name'];
+        $data['phone'] = $_POST['phone'];
+        $data['address'] = $_POST['address'];
         $data['about'] = '';
         $data['photo'] = '';
         $data['password'] = password_hash($_POST['password'], PASSWORD_BCRYPT);
-        $data['role'] = $_POST['role'] ?? '';
+        $data['role'] = $_POST['role'];
         $data['status'] = 0;
         $helper = new Helper();
         $data['createdAt'] = $helper->getDateTime();
+
+        if (empty($this->userService->getAllUsers())) {
+            $data['role'] = 'admin';
+        }
 
         if ($this->userService->getByEmail($_POST['email'])) {
             $_SESSION['notification'] = [
@@ -38,18 +47,23 @@ class AuthController
             exit;
         }
 
-        $this->userService->saveUser($data);
-        $_SESSION['notification'] = [
-            'message' => 'Register successfully, you can log in',
-            'alert-type' => 'success',
-        ];
-        header("Location: /$model/login/form");
-        exit;
+        return $this->userService->saveUser($data);
     }
 
     public function registerCompany()
     {
-        return $this->register('company');
+        $userId = $this->register('company');
+        $user = $this->userService->getById($userId);
+        if ($user->getRole() === 'company') {
+            $this->companyService->createCompany($userId);
+        }
+
+        $_SESSION['notification'] = [
+            'message' => 'Register successfully, you can log in',
+            'alert-type' => 'success',
+        ];
+        header("Location: /company/login/form");
+        exit;
     }
 
     public function loginForm()
