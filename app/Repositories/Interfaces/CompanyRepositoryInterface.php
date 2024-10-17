@@ -2,4 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface CompanyRepositoryInterface {}
+interface CompanyRepositoryInterface
+{
+    public function create($userId);
+}

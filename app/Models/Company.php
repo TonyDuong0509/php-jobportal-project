@@ -6,8 +6,6 @@ class Company
 {
     protected $id;
     protected $website;
-    protected $jobPostings = [];
-    protected $logo;
     protected $employee;
     protected $createdAt;
     protected $userId;
@@ -15,16 +13,12 @@ class Company
     public function __construct(
         $id,
         $website,
-        $jobPostings,
-        $logo,
         $employee,
         $createdAt,
         $userId
     ) {
         $this->id = $id;
         $this->website = $website;
-        $this->jobPostings = $jobPostings;
-        $this->logo = $logo;
         $this->employee = $employee;
         $this->createdAt = $createdAt;
         $this->userId = $userId;
@@ -62,42 +56,6 @@ class Company
     public function setWebsite($website): self
     {
         $this->website = $website;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of jobPostings
-     */
-    public function getJobPostings()
-    {
-        return $this->jobPostings;
-    }
-
-    /**
-     * Set the value of jobPostings
-     */
-    public function setJobPostings($jobPostings): self
-    {
-        $this->jobPostings = $jobPostings;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of logo
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
-
-    /**
-     * Set the value of logo
-     */
-    public function setLogo($logo): self
-    {
-        $this->logo = $logo;
 
         return $this;
     }
