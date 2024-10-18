@@ -45,7 +45,7 @@
                         <div class="logo-right-content">
                             <ul class="author-access-list">
                                 <a
-                                    href="employer-dashboard-post-job.html"
+                                    href="/company/post-job-page"
                                     class="theme-btn">
                                     <span class="la la-plus"></span>
                                     Post a Job

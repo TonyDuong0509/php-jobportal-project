@@ -17,3 +17,8 @@ $serviceContainer->add(App\Services\CategoryService::class, new App\Services\Cat
 // Company 
 $serviceContainer->add(App\Repositories\Interfaces\CompanyRepositoryInterface::class, new App\Repositories\CompanyRepository());
 $serviceContainer->add(App\Services\CompanyService::class, new App\Services\CompanyService($serviceContainer->resolve(App\Repositories\Interfaces\CompanyRepositoryInterface::class)));
+
+
+// Job 
+$serviceContainer->add(App\Repositories\Interfaces\JobRepositoryInterface::class, new App\Repositories\JobRepository());
+$serviceContainer->add(App\Services\JobService::class, new App\Services\JobService($serviceContainer->resolve(App\Repositories\Interfaces\JobRepositoryInterface::class)));

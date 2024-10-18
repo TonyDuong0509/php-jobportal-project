@@ -17,4 +17,19 @@ class CompanyService
     {
         return $this->companyRepository->create($userId);
     }
+
+    public function getAllCompanies($condition = null)
+    {
+        return $this->companyRepository->fetchAll($condition);
+    }
+
+    public function getById($id)
+    {
+        return $this->companyRepository->getById($id);
+    }
+
+    public function getByUserId($userId)
+    {
+        return $this->companyRepository->getByUserId($userId);
+    }
 }
