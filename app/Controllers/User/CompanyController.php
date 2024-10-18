@@ -2,15 +2,20 @@
 
 namespace App\Controllers\User;
 
+use App\Services\CommonService;
 use App\Services\UserService;
 
 class CompanyController
 {
     private $userService;
+    private $commonService;
 
-    public function __construct(UserService $userService)
-    {
+    public function __construct(
+        UserService $userService,
+        CommonService $commonService
+    ) {
         $this->userService = $userService;
+        $this->commonService = $commonService;
     }
 
     public function index()
@@ -84,7 +89,7 @@ class CompanyController
     {
         $id = $_POST['id'];
         $oldImage = $_POST['old_image'] ?? '';
-        $photo = $this->userService->handleImage('company', 'photo', 'company', $id, $oldImage);
+        $photo = $this->commonService->handleImage('company', 'photo', 'company', $id, $oldImage);
         $company = $this->userService->getById($id);
 
         if (!$company) {

@@ -39,7 +39,7 @@
                             </div>
                             <div class="btn-box margin-top-35px">
                                 <a
-                                    href="employer-dashboard-post-job.html"
+                                    href="/company/post-job-page"
                                     class="theme-btn bg-3">Post a Job</a>
                             </div>
                         </div>

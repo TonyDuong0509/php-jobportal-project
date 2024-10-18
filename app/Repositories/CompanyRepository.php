@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Company;
 use App\Repositories\Interfaces\CompanyRepositoryInterface;
 
 class CompanyRepository implements CompanyRepositoryInterface
@@ -19,5 +20,46 @@ class CompanyRepository implements CompanyRepositoryInterface
         }
         echo "Error: " . $sql . PHP_EOL;
         return false;
+    }
+
+    public function fetchAll($condition = null)
+    {
+        global $conn;
+        $companies = [];
+        $sql = "SELECT * FROM companies";
+
+        if ($condition) {
+            $sql .= " WHERE $condition";
+        }
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $company = new Company(
+                    $row['id'],
+                    $row['website'],
+                    $row['employee'],
+                    $row['createdAt'],
+                    $row['userId'],
+                );
+                $companies[] = $company;
+            }
+        }
+        return $companies;
+    }
+
+    public function getById($id)
+    {
+        $condition = "id = '$id'";
+        $companies = $this->fetchAll($condition);
+        $company = current($companies);
+        return $company;
+    }
+
+    public function getByUserId($userId)
+    {
+        $condition = "userId = '$userId'";
+        $companies = $this->fetchAll($condition);
+        $company = current($companies);
+        return $company;
     }
 }

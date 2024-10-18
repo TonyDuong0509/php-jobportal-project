@@ -61,4 +61,14 @@ $router->map('POST', '/company/change-password', function () use ($serviceContai
     $controller->changePassword();
 }, 'company.change.password');
 
+$router->map('GET', '/company/post-job-page', function () use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\JobController::class);
+    $controller->postJobPage();
+}, 'company.job.page');
+
+$router->map('POST', '/company/post-job', function () use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\JobController::class);
+    $controller->postJob();
+}, 'company.post.job');
+
 $match = $router->match();
