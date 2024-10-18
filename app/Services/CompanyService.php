@@ -3,13 +3,15 @@
 namespace App\Services;
 
 use App\Repositories\CompanyRepository;
+use App\Repositories\JobRepository;
 
 class CompanyService
 {
     private $companyRepository;
 
-    public function __construct(CompanyRepository $companyRepository)
-    {
+    public function __construct(
+        CompanyRepository $companyRepository,
+    ) {
         $this->companyRepository = $companyRepository;
     }
 
@@ -31,5 +33,10 @@ class CompanyService
     public function getByUserId($userId)
     {
         return $this->companyRepository->getByUserId($userId);
+    }
+
+    public function updateProfile($company)
+    {
+        return $this->companyRepository->updateProfile($company);
     }
 }

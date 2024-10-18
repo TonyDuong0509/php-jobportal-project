@@ -20,7 +20,7 @@
                                         <ul class="dropdown-menu-item">
                                             <li><a href="#">Jobseekers</a></li>
                                             <li>
-                                                <a href="#">My Job Postings</a>
+                                                <a href="<?php echo $router->generate('company.job.postings'); ?>">My Job Postings</a>
                                             </li>
                                         </ul>
                                     </li>

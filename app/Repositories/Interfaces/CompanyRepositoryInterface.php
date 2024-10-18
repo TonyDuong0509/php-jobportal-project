@@ -8,4 +8,5 @@ interface CompanyRepositoryInterface
     public function fetchAll($condition = null);
     public function getById($id);
     public function getByUserId($userId);
+    public function updateProfile($company);
 }

@@ -45,11 +45,11 @@
                     <div class="user-profile-action-wrap mb-5">
                         <div class="user-profile-action mb-4 d-flex align-items-center">
                             <form action="<?php echo $router->generate('company.upload.photo'); ?>" method="POST" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?php echo $company->getId(); ?>">
-                                <input type="hidden" name="old_image" value="/Applications/XAMPP/xamppfiles/htdocs/php/jobportal<?php echo $company->getPhoto(); ?>">
+                                <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
+                                <input type="hidden" name="old_image" value="/Applications/XAMPP/xamppfiles/htdocs/php/jobportal<?php echo $user->getPhoto(); ?>">
                                 <div class="user-pro-img mb-3">
                                     <img
-                                        src="<?php echo $company->getPhoto(); ?>"
+                                        src="<?php echo $user->getPhoto(); ?>"
                                         alt=" user-image"
                                         class="img-fluid radius-round border" />
                                 </div>
@@ -89,7 +89,7 @@
                                 <div class="billing-content">
                                     <div class="contact-form-action">
                                         <form action="<?php echo $router->generate('company.update.profile'); ?>" method="POST">
-                                            <input type="hidden" name="id" value="<?php echo $company->getId(); ?>">
+                                            <input type="hidden" name="id" value="<?php echo $user->getId(); ?>">
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="input-box">
@@ -101,7 +101,7 @@
                                                                 class="form-control"
                                                                 type="text"
                                                                 name="name"
-                                                                value="<?php echo $company->getName(); ?>"
+                                                                value="<?php echo $user->getName(); ?>"
                                                                 placeholder="Company name" />
                                                         </div>
                                                     </div>
@@ -118,7 +118,7 @@
                                                                 class="form-control"
                                                                 type="text"
                                                                 name="phone"
-                                                                value="<?php echo $company->getPhone(); ?>"
+                                                                value="<?php echo $user->getPhone(); ?>"
                                                                 placeholder="Phone" />
                                                         </div>
                                                     </div>
@@ -134,7 +134,7 @@
                                                                 class="form-control"
                                                                 type="text"
                                                                 name="address"
-                                                                value="<?php echo $company->getAddress(); ?>"
+                                                                value="<?php echo $user->getAddress(); ?>"
                                                                 placeholder="Address" />
                                                         </div>
                                                     </div>
@@ -149,8 +149,36 @@
                                                                 class="form-control"
                                                                 type="text"
                                                                 name="email"
-                                                                value="<?php echo $company->getEmail(); ?>"
+                                                                value="<?php echo $user->getEmail(); ?>"
                                                                 disabled />
+                                                        </div>
+                                                    </div>
+                                                    <!-- end input-box -->
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="input-box">
+                                                        <label class="label-text">Website</label>
+                                                        <div class="form-group">
+                                                            <span class="la la-user form-icon"></span>
+                                                            <input
+                                                                class="form-control"
+                                                                type="text"
+                                                                name="website"
+                                                                value="<?php echo $company->getWebsite(); ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <!-- end input-box -->
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="input-box">
+                                                        <label class="label-text">Employee</label>
+                                                        <div class="form-group">
+                                                            <span class="la la-user form-icon"></span>
+                                                            <input
+                                                                class="form-control"
+                                                                type="number"
+                                                                name="employee"
+                                                                value="<?php echo $company->getEmployee(); ?>" />
                                                         </div>
                                                     </div>
                                                     <!-- end input-box -->
@@ -159,7 +187,7 @@
                                                     <div class="input-box">
                                                         <label class="label-text">About Your Company</label>
                                                         <div class="form-group">
-                                                            <textarea class="message-control form-control pt-3 pe-4 pb-3 ps-4" name="about"><?php echo $company->getAbout(); ?></textarea>
+                                                            <textarea class="message-control form-control pt-3 pe-4 pb-3 ps-4" name="about"><?php echo $user->getAbout(); ?></textarea>
                                                         </div>
                                                     </div>
                                                 </div>

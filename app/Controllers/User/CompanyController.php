@@ -3,19 +3,27 @@
 namespace App\Controllers\User;
 
 use App\Services\CommonService;
+use App\Services\CompanyService;
+use App\Services\JobService;
 use App\Services\UserService;
 
 class CompanyController
 {
     private $userService;
     private $commonService;
+    private $companyService;
+    private $jobService;
 
     public function __construct(
         UserService $userService,
-        CommonService $commonService
+        CommonService $commonService,
+        CompanyService $companyService,
+        JobService $jobService,
     ) {
         $this->userService = $userService;
         $this->commonService = $commonService;
+        $this->companyService = $companyService;
+        $this->jobService = $jobService;
     }
 
     public function index()
@@ -39,8 +47,9 @@ class CompanyController
     public function profile($id)
     {
         $title = 'Company Profile';
-        $company = $this->userService->getById($id);
-        if (!$company) {
+        $user = $this->userService->getById($id);
+        $company = $this->companyService->getByUserId($user->getId());
+        if (!$user) {
             $_SESSION['notification'] = [
                 'message' => 'Company not exist',
                 'alert-type' => 'error',
@@ -54,9 +63,10 @@ class CompanyController
     public function updateProfile()
     {
         $id = $_POST['id'];
-        $company = $this->userService->getById($id);
+        $user = $this->userService->getById($id);
+        $company = $this->companyService->getByUserId($user->getId());
 
-        if (!$company) {
+        if (!$user) {
             $_SESSION['notification'] = [
                 'message' => 'Company not exist',
                 'alert-type' => 'error',
@@ -69,13 +79,19 @@ class CompanyController
         $phone = $_POST['phone'] ?? '';
         $address = $_POST['address'] ?? '';
         $about = $_POST['about'] ?? '';
+        $website = $_POST['website'] ?? '';
+        $employee = (int)$_POST['employee'] ?? '';
 
-        $company->setName($name);
-        $company->setPhone($phone);
-        $company->setAddress($address);
-        $company->setAbout($about);
+        $user->setName($name);
+        $user->setPhone($phone);
+        $user->setAddress($address);
+        $user->setAbout($about);
 
-        $this->userService->updateUser($company);
+        $company->setWebsite($website);
+        $company->setEmployee($employee);
+
+        $this->userService->updateUser($user);
+        $this->companyService->updateProfile($company);
 
         $_SESSION['notification'] = [
             'message' => 'Update profile successfully',
@@ -164,5 +180,35 @@ class CompanyController
         ];
         header("Location: /company/change-password/$id");
         exit;
+    }
+
+    public function jobPostings()
+    {
+        $title = 'Company Job Postings';
+        $existingCompany = $_SESSION['company'];
+        if (!$existingCompany) {
+            $_SESSION['notification'] = [
+                'message' => 'Please login',
+                'alert-type' => 'error',
+            ];
+            header("Location: /company/login/form");
+            exit;
+        }
+
+        $id = $_SESSION['company']['id'];
+
+        $user = $this->userService->getById($id);
+        if (!$user) {
+            $_SESSION['notification'] = [
+                'message' => 'Company not exist',
+                'alert-type' => 'error',
+            ];
+            header("Location: /company/home");
+            exit;
+        }
+
+        $jobPostings = $this->jobService->getJobPostingsOfCompany($user->getId());
+
+        require ABSPATH . '/resources/user/company/jobPostings.php';
     }
 }

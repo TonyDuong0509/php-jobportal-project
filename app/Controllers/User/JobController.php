@@ -45,7 +45,6 @@ class JobController
         }
 
         $userId = (int)$_SESSION['company']['id'];
-        $company = $this->companyService->getByUserId($userId);
 
         $data = [];
         $data['title'] = $_POST['title'];
@@ -54,7 +53,7 @@ class JobController
         $data['type'] = $_POST['type'];
         $data['level'] = $_POST['level'];
         $data['categoryId'] = (int)$_POST['categoryId'];
-        $data['companyId'] = $company->getId();
+        $data['companyId'] = $userId;
         $data['offeredSalary'] = $_POST['offeredSalary'];
         $data['experience'] = $_POST['experience'];
         $data['qualification'] = $_POST['qualification'];
@@ -85,28 +84,16 @@ class JobController
         }
     }
 
-    public function uploadImage()
+    public function jobDetails($id)
     {
-        if (!isset($_SESSION['company']) || empty($_SESSION['company'])) {
-            $_SESSION['notification'] = [
-                'message' => 'Please login to post a job',
-                'alert-type' => 'error'
-            ];
-            header("Location: /company/login/form");
-            exit;
-        }
+        $title = 'Job Details';
 
-        $userId = (int)$_SESSION['company']['id'];
-        $company = $this->companyService->getByUserId($userId);
+        $job = $this->jobService->getById($id);
+        $relatedJobPostings = $this->jobService->getJobPostingsOfCompany($job->getCompanyId());
+        $relatedJobPostings = array_filter($relatedJobPostings, function ($relatedJob) use ($id) {
+            return $relatedJob->getId() !== $id;
+        });
 
-        $id = $_POST['jobId'];
-        if (!$id) {
-            $_SESSION['notification'] = [
-                'message' => 'Post a Job in Job information before uploading image',
-                'alert-type' => 'error'
-            ];
-            header("Location: /company/post-job-page");
-            exit;
-        }
+        require ABSPATH . '/resources/user/job/jobDetails.php';
     }
 }
