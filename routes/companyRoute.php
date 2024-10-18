@@ -71,4 +71,14 @@ $router->map('POST', '/company/post-job', function () use ($serviceContainer) {
     $controller->postJob();
 }, 'company.post.job');
 
+$router->map('GET', '/company/job-postings', function () use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\CompanyController::class);
+    $controller->jobPostings();
+}, 'company.job.postings');
+
+$router->map('GET', '/company/job-details/[i:id]/[*:slug]', function ($id, $slug) use ($serviceContainer) {
+    $controller = $serviceContainer->resolve(App\Controllers\User\JobController::class);
+    $controller->jobDetails($id, $slug);
+}, 'company.job.details');
+
 $match = $router->match();

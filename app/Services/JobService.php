@@ -51,4 +51,14 @@ class JobService
             exit;
         }
     }
+
+    public function getJobPostingsOfCompany($userId)
+    {
+        return $this->jobRepository->getAllByCompanyId($userId);
+    }
+
+    public function getById($id)
+    {
+        return $this->jobRepository->getById($id);
+    }
 }

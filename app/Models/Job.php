@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Repositories\CategoryRepository;
+use App\Repositories\UserRepository;
+
 class Job
 {
     protected $id;
@@ -20,6 +23,7 @@ class Job
     protected $quantity;
     protected $isFull;
     protected $image;
+    protected $level;
     protected $createdAt;
 
     public function __construct(
@@ -39,6 +43,7 @@ class Job
         $quantity,
         $isFull,
         $image,
+        $level,
         $createdAt
     ) {
         $this->id = $id;
@@ -57,7 +62,22 @@ class Job
         $this->quantity = $quantity;
         $this->isFull = $isFull;
         $this->image = $image;
+        $this->level = $level;
         $this->createdAt = $createdAt;
+    }
+
+    public function getCompany()
+    {
+        $userRepository = new UserRepository();
+        $user = $userRepository->findById($this->companyId);
+        return $user;
+    }
+
+    public function getCategory()
+    {
+        $categoryRepository = new CategoryRepository();
+        $category = $categoryRepository->getById($this->categoryId);
+        return $category;
     }
 
     /**
@@ -344,6 +364,24 @@ class Job
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of level
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * Set the value of level
+     */
+    public function setLevel($level): self
+    {
+        $this->level = $level;
 
         return $this;
     }

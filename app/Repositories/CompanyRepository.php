@@ -62,4 +62,20 @@ class CompanyRepository implements CompanyRepositoryInterface
         $company = current($companies);
         return $company;
     }
+
+    public function updateProfile($company)
+    {
+        global $conn;
+
+        $id = $company->getId();
+        $website = $company->getWebsite();
+        $employee = $company->getEmployee();
+
+        $sql = "UPDATE companies
+                SET website = '$website', employee = '$employee'
+                WHERE id = '$id'";
+        if ($conn->query($sql) === true) return true;
+        echo "Error: " . $sql . PHP_EOL;
+        return false;
+    }
 }

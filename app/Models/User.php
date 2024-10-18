@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Repositories\CompanyRepository;
+
 class User
 {
     protected $id;
@@ -238,5 +240,12 @@ class User
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getCompanyUser()
+    {
+        $companyRepository = new CompanyRepository();
+        $companyUser = $companyRepository->getByUserId($this->id);
+        return $companyUser;
     }
 }

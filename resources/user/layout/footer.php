@@ -105,27 +105,6 @@
             </div>
             <!-- end col-lg-2 -->
         </div>
-        <!-- end row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="copy-right margin-top-50px padding-top-30px">
-                    <p class="copy__desc">
-                        Copyright <span id="copyright-date"></span> Zobstar Inc. Made with
-                        <span class="la la-heart-o"></span> by
-                        <a href="https://themeforest.net/user/techydevs/portfolio">TechyDevs</a>
-                    </p>
-                    <ul class="list-items">
-                        <li class="color-text-2 font-weight-medium">Browse by:</li>
-                        <li><a href="#">Companies,</a></li>
-                        <li><a href="#">Jobs,</a></li>
-                        <li><a href="#">Locations</a></li>
-                    </ul>
-                </div>
-                <!-- end copy-right -->
-            </div>
-            <!-- end col-lg-12 -->
-        </div>
-        <!-- end row -->
     </div>
     <!-- end container -->
 </section>
